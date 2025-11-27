@@ -6,8 +6,9 @@ parte1=articol[:jumatate]
 parte2=articol[jumatate:]
 parte1 = parte1.upper()
 parte1=parte1.strip()
-partge2=parte2[::-1]
+parte2=parte2[::-1]
 parte2=parte2.capitalize()
 parte2 = parte2.translate(str.maketrans('', '', string.punctuation))
 rezultate=parte1+parte2
+
 print(rezultate)
