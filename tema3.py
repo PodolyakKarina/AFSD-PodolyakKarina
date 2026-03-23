@@ -1,36 +1,36 @@
 import csv
 import json
 
-def citeste_produse_csv(fisier):
-    produse = {}
-    f = open(fisier, 'r')
-    continut = list(csv.reader(f))
+def citeste_produse_csv(fisier): #citește un fișier CSV cu produse și le pune într-un dicționar.
+    produse = {} #Creează un dicționar gol unde salvam produsele.
+    f = open(fisier, 'r') #Deschide fișierul pentru citire
+    continut = list(csv.reader(f)) #citește fiecare linie ca listă , continut devine o listă de liste
     f.close()
 
-    for linie in continut:
+    for linie in continut: #Parcurge fiecare linie si sare peste header
         if linie[0] == "id":
             continue
 
-        id_produs = linie[0]
+        id_produs = linie[0] #La datele din fiecare coloană tranforma pret in nr real si stoc in nr intreg
         nume = linie[1]
         pret = float(linie[2])
         stoc = int(linie[3])
 
-        produse[id_produs] = {
+        produse[id_produs] = { # adauga produsul in dictionar
             "nume": nume,
             "pret": pret,
             "stoc": stoc
         }
     return produse
 
-def citeste_reduceri_json(fisier):
+def citeste_reduceri_json(fisier): # citește JSON-ul și îl transformă automat în dictionar
     f = open(fisier, 'r')
     reduceri = json.load(f)
     f.close()
     return reduceri
 def scrie_bon_txt(fisier, text):
-    f = open(fisier, 'w')
-    f.write(text)
+    f = open(fisier, 'w') #rescrie fisierul
+    f.write(text) #pune textul în fișier
     f.close()
 produse = citeste_produse_csv("produse.csv")
 reduceri = citeste_reduceri_json("reduceri.json")
